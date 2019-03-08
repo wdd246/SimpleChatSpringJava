@@ -12,22 +12,41 @@
 
 <div id="username-page">
     <div class="username-page-container">
-        <h1 class="title">Type your username</h1>
+        <h1 class="title2">EasyChat.com</h1>
+        <h3 class="title">Sign In</h3>
+        <p id="error"></p>
         <form id="usernameForm" name="usernameForm">
             <div class="form-group">
-                <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" />
+                <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" required/>
+                <br>
+                <input type="password" id="pass" placeholder="Password" autocomplete="off" class="form-control" required/>
             </div>
             <div class="form-group">
-                <button type="submit" class="accent username-submit">Start Chatting</button>
+                <button type="submit" id="submit" class="accent username-submit">Start Chatting</button>
             </div>
         </form>
+
+        <!--<div if="${param.error}">-->
+            <!--Invalid username and password.-->
+        <!--</div>-->
+        <!--<h1 class="title">Type your username</h1>-->
+        <!--<form id="usernameForm" name="usernameForm" action="@{/}" method="post">-->
+
+            <!--<div><label> User Name : <input type="text" name="username" id="name" placeholder="Username" autocomplete="off" class="form-control"/> </label></div>-->
+            <!--<div><label> Password: <input type="password" name="password"/> </label></div>-->
+            <!--<div class="form-group">-->
+                <!--<button type="submit" class="accent username-submit">Start Chatting</button>-->
+            <!--</div>-->
+        <!--</form>-->
+
     </div>
 </div>
 
 <div id="chat-page" class="hidden">
     <div class="chat-container">
         <div class="chat-header">
-            <h2>Spring WebSocket Chat Demo</h2>
+            <h2>Easychat.pl</h2>
+            <p class="members"></p>
         </div>
         <div class="connecting">
             Connecting...
@@ -43,6 +62,26 @@
                 </div>
             </div>
         </form>
+        <!--<div class="chat-header">-->
+            <!--<h2>Spring WebSocket Chat Demo</h2>-->
+        <!--</div>-->
+        <!--<div class="connecting">-->
+            <!--Connecting...-->
+        <!--</div>-->
+        <!--<ul id="messageArea">-->
+
+        <!--</ul>-->
+        <!--<form id="messageForm" name="messageForm">-->
+            <!--<div class="form-group">-->
+                <!--<div class="input-group clearfix">-->
+                    <!--<input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>-->
+                    <!--<button type="submit" class="primary">Send</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</form>-->
+        <!--<form action="@{/}" method="post">-->
+            <!--<input type="submit" value="Sign Out"/>-->
+        <!--</form>-->
     </div>
 </div>
 

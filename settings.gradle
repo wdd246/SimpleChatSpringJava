@@ -4,10 +4,4 @@ pluginManagement {
 	}
 }
 
-//dependencies {
-//    implementation platform('org.springframework.boot:spring-boot-dependencies:1.5.8.RELEASE')
-//    implementation 'org.springframework.boot:spring-boot-starter-amqp'
-//    implementation 'org.springframework.boot:spring-boot-starter-reactor-netty'
-//}
-
 rootProject.name = 'websocket'

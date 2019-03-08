@@ -15,5 +15,13 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Spring-Security
+	//compile("org.springframework.boot:spring-boot-starter-security")
+
+	// RabbitSQ
+	//implementation platform('org.springframework.boot:spring-boot-dependencies:1.5.8.RELEASE')
+    //implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    //implementation 'org.springframework.boot:spring-boot-starter-reactor-netty'
 }
+

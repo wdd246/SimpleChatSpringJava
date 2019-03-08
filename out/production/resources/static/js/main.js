@@ -7,9 +7,16 @@ var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
+//var members = document.querySelector('.members');
 
 var stompClient = null;
 var username = null;
+var password = null;
+var errors =  document.getElementById('error');
+
+var attempt =3;
+//var counter = 0;
+
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -18,8 +25,9 @@ var colors = [
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
+    password = document.querySelector('#pass').value.trim();
 
-    if(username) {
+    if(username == "admin" && password == "admin") {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
@@ -27,6 +35,11 @@ function connect(event) {
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, onError);
+    }
+    else{
+        document.querySelector('#name').value = null;
+        document.querySelector('#pass').value = null;
+        errors.innerHTML = "Invalid username or password";
     }
     event.preventDefault();
 }
@@ -43,6 +56,7 @@ function onConnected() {
     )
 
     connectingElement.classList.add('hidden');
+    //    members.textContent = wss.clients.size;
 }
 
 
@@ -60,6 +74,9 @@ function sendMessage(event) {
             content: messageInput.value,
             type: 'CHAT'
         };
+        if(messageInput.value=":D"){
+            messageInput.value="😀";
+        }
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
@@ -75,9 +92,12 @@ function onMessageReceived(payload) {
     if(message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
+        //members.textContent = message.sender.getStats();
+
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
+        //members.textContent = --counter;
     } else {
         messageElement.classList.add('chat-message');
 
@@ -116,3 +136,5 @@ function getAvatarColor(messageSender) {
 
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)
+
+
