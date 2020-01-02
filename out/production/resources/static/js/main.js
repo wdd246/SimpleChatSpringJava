@@ -74,9 +74,6 @@ function sendMessage(event) {
             content: messageInput.value,
             type: 'CHAT'
         };
-        if(messageInput.value=":D"){
-            messageInput.value="😀";
-        }
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
