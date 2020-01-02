@@ -13,7 +13,7 @@ public class ChatController extends Thread{
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) throws InterruptedException {
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         return chatMessage;
     }
 

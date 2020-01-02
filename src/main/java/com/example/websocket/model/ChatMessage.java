@@ -4,12 +4,17 @@ public class ChatMessage {
     private MessageType type;
     private String content;
     private String sender;
+    private String info;
 
     public enum MessageType {
         CHAT,
         JOIN,
         LEAVE
     }
+
+    public ChatMessage(String info){}
+
+    public ChatMessage(){}
 
     public MessageType getType() {
         return type;
