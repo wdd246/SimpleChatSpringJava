@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RequestMapping
 @RestController
 public class ThreadController {
@@ -20,38 +18,62 @@ public class ThreadController {
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
-    //@GetMapping("/hello")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) throws InterruptedException {
-        Runnable runnable =
-                () -> {
-                    try {
-                        Thread.sleep(5000);
-                        template.convertAndSend("/topic/public", getMessage());
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("Lambda Runnable running " + Thread.currentThread().getName());
-                };
 
-        Thread thread = new Thread(runnable);
+//        Runnable runnable =
+//                () -> {
+//                   try {
+//                        Thread.sleep(5000);
+//                        template.convertAndSend("/topic/public", getMessage());
+//                        ChatMessage chatMessageT = new ChatMessage();
+//                        chatMessageT.setType(ChatMessage.MessageType.CHAT);
+//                        chatMessageT.setSender(chatMessage.getSender());
+//                        chatMessageT.setContent(chatMessage.getContent());
+//                        template.convertAndSend("/topic/public", chatMessageT);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                };
+//        Thread thread = new Thread(runnable);
+
+        Thread thread = new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(5000);
+                    template.convertAndSend("/topic/public", getMessage());
+                    ChatMessage chatMessagePool = new ChatMessage();
+                    chatMessagePool.setType(ChatMessage.MessageType.CHAT);
+                    chatMessagePool.setSender(chatMessage.getSender());
+                    chatMessagePool.setContent(chatMessage.getContent());
+                    template.convertAndSend("/topic/public", chatMessagePool);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Thread.currentThread().interrupt();
+                }
+            }
+        };
         thread.start();
-        //System.out.println("Lambda Runnable running " + Thread.currentThread().getName());
-        Thread.sleep(5000);
-        return chatMessage;
+        return null;
 
     }
 
-    @GetMapping("/hello1")
-    public void hello1() throws InterruptedException {
+    @MessageMapping("/chat.sendMessageThread")
+    @SendTo("/topic/public")
+    public ChatMessage sendMessageThread(@Payload ChatMessage chatMessage) throws InterruptedException {
         Thread.sleep(5000);
-        template.convertAndSend("/topic/public", getMessage());
+        ChatMessage chatMessageOneThread = new ChatMessage();
+        chatMessageOneThread.setType(ChatMessage.MessageType.CHAT);
+        chatMessageOneThread.setSender("admin");
+        chatMessageOneThread.setContent("Thread: Thread-1 " + Thread.currentThread().getState() );
+        template.convertAndSend("/topic/public", chatMessageOneThread);
+        return chatMessage;
     }
 
     private ChatMessage getMessage() {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setType(ChatMessage.MessageType.CHAT);
         chatMessage.setSender("admin");
-        chatMessage.setContent("Lambda Runnable running " + Thread.currentThread().getName());
+        chatMessage.setContent("Thread: " + Thread.currentThread().getName() + " " + Thread.currentThread().getState());
         return chatMessage;
     }
 }

@@ -81,6 +81,21 @@ function sendMessage(event) {
     event.preventDefault();
 }
 
+function sendMessageThread(event) {
+    var messageContent = messageInput.value.trim();
+    if(messageContent && stompClient) {
+        var chatMessage = {
+            sender: username,
+            content: messageInput.value,
+            type: 'CHAT'
+        };
+        stompClient.send("/app/chat.sendMessageThread", {}, JSON.stringify(chatMessage));
+        //window.location.href = '/hello1';
+        messageInput.value = '';
+    }
+    event.preventDefault();
+}
+
 
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
@@ -132,7 +147,8 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
-usernameForm.addEventListener('submit', connect, true)
-messageForm.addEventListener('submit', sendMessage, true)
+usernameForm.addEventListener('submit', connect, true);
+//document.getElementById('one').addEventListener('submit', sendMessage, true);
+//document.getElementById('pool').addEventListener('submit', sendMessageThread, true)
 
 

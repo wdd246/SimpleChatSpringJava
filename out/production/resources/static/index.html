@@ -58,7 +58,8 @@
             <div class="form-group">
                 <div class="input-group clearfix">
                     <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
-                    <button type="submit" class="primary">Send</button>
+                    <button type="submit" id="pool" onclick="sendMessage(event)" class="primary">Send by thred pool</button>
+                    <button type="submit" id="one" onclick="sendMessageThread(event)" class="primary">Send by 1 thred</button>
                 </div>
             </div>
         </form>
