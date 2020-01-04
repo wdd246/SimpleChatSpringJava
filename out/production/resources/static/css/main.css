@@ -240,11 +240,12 @@ button.accent {
 
 #chat-page .chat-message p {
     color: #43464b;
+    word-break: break-all;
 }
 
 #messageForm .input-group input {
     float: left;
-    width: 75%;
+    width: 90%;
 }
 
 #messageForm .input-group button {

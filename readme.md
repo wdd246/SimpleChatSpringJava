@@ -1,5 +1,1 @@
-##TODO
-- [ ] Dwa guziki send with thread and pool thread
-- [ ] Opóźnienie
-- [ ] Nazwy pakietów i plików
-- [ ] Refraktor kodu
+git push -f heroku local_branch_name:master
