@@ -1,6 +1,9 @@
 package com.example.websocket.controller;
 import com.example.websocket.model.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +18,10 @@ public class ThreadController {
     @Autowired
     private SimpMessagingTemplate template;
 
-    @GetMapping("/hello")
-    public void hello()  {
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/topic/public")
+    //@GetMapping("/hello")
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) throws InterruptedException {
         Runnable runnable =
                 () -> {
                     try {
@@ -30,6 +35,10 @@ public class ThreadController {
 
         Thread thread = new Thread(runnable);
         thread.start();
+        //System.out.println("Lambda Runnable running " + Thread.currentThread().getName());
+        Thread.sleep(5000);
+        return chatMessage;
+
     }
 
     @GetMapping("/hello1")

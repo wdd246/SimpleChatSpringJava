@@ -75,6 +75,7 @@ function sendMessage(event) {
             type: 'CHAT'
         };
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        //window.location.href = '/hello1';
         messageInput.value = '';
     }
     event.preventDefault();
