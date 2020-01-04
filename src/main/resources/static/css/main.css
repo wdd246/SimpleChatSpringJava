@@ -98,6 +98,20 @@ button.primary {
     color: #fff;
 }
 
+button.danger{
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    position: absolute;
+    right: 15px;
+}
+
+button.success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
 button.accent {
     background-color: #3498db;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
@@ -109,9 +123,9 @@ button.accent {
 }
 
 .title2{
-    letter-spacing: 2px !important;
+    /*letter-spacing: 2px !important;
     border-bottom: 2px solid black;
-    border-top: 2px solid black;
+    border-top: 2px solid black;*/
 }
 
 .username-page-container {
@@ -149,7 +163,7 @@ button.accent {
 }
 
 .chat-container {
-    max-width: 700px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     background-color: #fff;
@@ -230,12 +244,12 @@ button.accent {
 
 #messageForm .input-group input {
     float: left;
-    width: calc(100% - 85px);
+    width: 57%;
 }
 
 #messageForm .input-group button {
     float: left;
-    width: 80px;
+    width: fit-content;
     height: 38px;
     margin-left: 5px;
 }

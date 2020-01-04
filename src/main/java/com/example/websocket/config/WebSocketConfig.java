@@ -25,7 +25,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     public void configureClientInboundChannel(ChannelRegistration registration) {
         registration.taskExecutor().corePoolSize(0).maxPoolSize(1).keepAliveSeconds(999).queueCapacity(999);
-
     }
 
 }

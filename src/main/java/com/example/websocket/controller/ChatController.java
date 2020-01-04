@@ -8,12 +8,9 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class ChatController extends Thread{
+public class ChatController{
 
-//    @MessageMapping("/chat.sendMessage")
-//    @SendTo("/topic/public")
-//    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) throws InterruptedException {
-//        //Thread.sleep(5000);
+//    public ChatMessage sendMessage(@Payload ChatMessage chatMessage){
 //        return chatMessage;
 //    }
 

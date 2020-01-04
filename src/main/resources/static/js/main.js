@@ -27,7 +27,7 @@ function connect(event) {
     username = document.querySelector('#name').value.trim();
     password = document.querySelector('#pass').value.trim();
 
-    if(username == "admin" && password == "admin") {
+    //if(username == "admin" && password == "admin") {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
@@ -35,12 +35,12 @@ function connect(event) {
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, onError);
-    }
-    else{
-        document.querySelector('#name').value = null;
-        document.querySelector('#pass').value = null;
-        errors.innerHTML = "Invalid username or password";
-    }
+    //}
+    //else{
+    //    document.querySelector('#name').value = null;
+    //    document.querySelector('#pass').value = null;
+    //    errors.innerHTML = "Invalid username or password";
+    //}
     event.preventDefault();
 }
 
@@ -96,6 +96,31 @@ function sendMessageThread(event) {
     event.preventDefault();
 }
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function addDoubleZero(i) {
+    if (i < 10) {
+        i = "00" + i;
+    }
+    else if (i < 100) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function getTime() {
+    var d = new Date();
+    var h = addZero(d.getHours());
+    var m = addZero(d.getMinutes());
+    var s = addZero(d.getSeconds());
+    var ms = addDoubleZero(d.getMilliseconds());
+    return h + ":" + m + ":" + s + ":" + ms;
+}
 
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
@@ -125,6 +150,11 @@ function onMessageReceived(payload) {
         var usernameText = document.createTextNode(message.sender);
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);
+
+        var time = document.createElement('span');
+        time.innerHTML=getTime();
+        time.style.cssFloat='right';
+        messageElement.appendChild(time);
     }
 
     var textElement = document.createElement('p');

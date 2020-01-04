@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping
 @RestController
-public class ThreadController {
+public class ThreadController extends Thread{
 
     @Autowired
     private SimpMessagingTemplate template;
@@ -54,7 +54,6 @@ public class ThreadController {
         };
         thread.start();
         return null;
-
     }
 
     @MessageMapping("/chat.sendMessageThread")
