@@ -94,6 +94,14 @@ function sendMessageThread(event) {
         messageInput.value = '';
     }
     event.preventDefault();
+    document.getElementById("one").disabled = true;
+    document.getElementById("one").style.backgroundColor="gray";
+    document.getElementById("one").style.cursor="wait";
+    setTimeout(function(){document.getElementById("one").disabled = false;
+        document.getElementById("one").style.backgroundColor="#128ff2";
+        document.getElementById("one").style.cursor="pointer"},5000);
+
+
 }
 
 function addZero(i) {

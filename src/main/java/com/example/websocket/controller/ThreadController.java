@@ -38,18 +38,18 @@ public class ThreadController extends Thread{
 
         Thread thread = new Thread(){
             public void run(){
-                try {
-                    Thread.sleep(5000);
-                    template.convertAndSend("/topic/public", getMessage());
-                    ChatMessage chatMessagePool = new ChatMessage();
-                    chatMessagePool.setType(ChatMessage.MessageType.CHAT);
-                    chatMessagePool.setSender(chatMessage.getSender());
-                    chatMessagePool.setContent(chatMessage.getContent());
-                    template.convertAndSend("/topic/public", chatMessagePool);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Thread.currentThread().interrupt();
-                }
+            try {
+                Thread.sleep(5000);
+                template.convertAndSend("/topic/public", getMessage());
+                ChatMessage chatMessagePool = new ChatMessage();
+                chatMessagePool.setType(ChatMessage.MessageType.CHAT);
+                chatMessagePool.setSender(chatMessage.getSender());
+                chatMessagePool.setContent(chatMessage.getContent());
+                template.convertAndSend("/topic/public", chatMessagePool);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
             }
         };
         thread.start();
